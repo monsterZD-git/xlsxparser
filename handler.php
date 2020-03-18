@@ -1,6 +1,7 @@
 <?php
 
-require_once 'E:/OSPanel/domains/xlsxparser/PHPExcel/PHPExcel.php';
+require_once 'E:/OSPanel/domains/xlsxparser/PHPExcel/PHPExcel.php'; //пропишите свой путь
+$base_path = 'E:/OSPanel/domains/xlsxparser/upload/'; //пропишите свой путь
 
 if( isset( $_POST['file_upload'] ) ){  
 
@@ -22,7 +23,7 @@ if( isset( $_POST['file_upload'] ) ){
 
   if($file_name != '') { 
 
-$file = 'E:/OSPanel/domains/xlsxparser/upload/'.$file_name; //example.xls test.xlsx
+$file = $base_path.$file_name; 
 
 $info = new SplFileInfo($file);
 

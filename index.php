@@ -32,7 +32,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -50,7 +50,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/index.php">
+        <a class="nav-link" href="/result.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Решение</span></a>
       </li>
@@ -91,53 +91,40 @@
         <div class="container-fluid">
 
           <div class="card shadow mb-4" data-example-id="">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Загрузка и обработка файла XLSX</h6>
-          </div>
-          <div class="card-body">
-                <div class="row">
-                  <div class="form-group col-md-12">
-                    <div class="form-group col-md-12">
-                      <label for="exampleFormControlFile1">Укажите файл для загрузки</label>
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1" name="exampleFormControlFile1" lang="ru" accept=".xlsx">
-                    </div>
-                    <small class="form-text text-muted">Выберите нужный файл в формате xlsx, другие форматы не обрабатываются.</small>
-                  </div>
-                </div>
-                <button type="button" id="submit" class="btn btn-primary" id="charts_filtrs">Загрузить</button>
-            </div>
-          </div>
-
-          <div id="status_upload" class="card mb-4 py-3 border-left-danger" style="display: none;">
-            <div class="card-body"></div>
-          </div>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4" id="tables" style="display: none;">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Результат обработки</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Тестовое задание.</h6>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>id</th>
-                      <th>ФИО</th>
-                      <th>Остаток на счете</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Иванов Иван Иванович</td>
-                      <td>13000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+
+                <div class="row">
+                  <div class="form-group col-md-12">
+
+                    <p>Требования:</p>
+                    <p>Необходимо реализовать страницу с формой для загрузки файла и обработку загруженного файла.</p>
+
+                    <p>Файл можно загружать только с расширение xlsx.</p>
+
+                    <p>При загрузке файла предполагается, что это excel-файл и в нем 2 листа. Первый называется «first», второй «second»</p>
+
+                    <p>На первом листе в первой, второй, и третьей колонке id клиента и ФИО клиента, и начальный остаток</p>
+
+                    <p>На втором листе  в первой и второй колонке  id клиента и вводы/выводы клиента в рублях.</p>
+
+                    <p>В случае, если не выполняется какое-либо из условий, должно выводиться сообщение об ошибке.</p>
+
+                    <p>Необходимо реализовать загрузку файла и вывод текущий остаток с учетом вводов/выводов.</p>
+
+                    <p>Пример файла приложен. Система, разумеется, должна обрабатывать не только этот конкретный файл, а все файлы такого типа (а на  ошибочные  выдавать ошибки).</p>
+
+                    <p>Задание должно быть выполнено либо на Yii 1.x,  либо  на чистом PHP, без использования фреймворков. Сторонние модули для работы с excel использовать можно (при необходимости найти самостоятельно).</p>
+
+                  </div>
+                </div>
+
             </div>
           </div>
+
+
 
         </div>
         <!-- /.container-fluid -->
@@ -176,98 +163,6 @@
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-
-      var table = $('#dataTable').DataTable({
-        searching: false,
-        select: true,
-        language: { 
-          "decimal":        "",
-          "emptyTable":     "Данные отсутствуют в таблице",
-          "info":           "Показаны записи с _START_ по _END_ из _TOTAL_",
-          "infoEmpty":      "Showing 0 to 0 of 0 entries",
-          "infoFiltered":   "(filtered from _MAX_ total entries)",
-          "infoPostFix":    "",
-          "thousands":      ",",
-          "lengthMenu":     "Показать _MENU_ записей",
-          "loadingRecords": "загрузка...",
-          "processing":     "Processing...",
-          "search":         "Search:",
-          "zeroRecords":    "По заданным условиям записей не найдено",
-          "paginate": {
-              "first":      "первый",
-              "last":       "последний",
-              "next":       "следующий",
-              "previous":   "предыдущий"
-          },
-          "aria": {
-              "sortAscending":  ": activate to sort column ascending",
-              "sortDescending": ": activate to sort column descending"
-          }
-      }
-      });
-
-      var files; 
-      $('#exampleFormControlFile1').on('change', function(){
-        files = this.files;
-      });
-
-      $('#submit').on('click', function(event ){
-      $('#status_upload').hide(); 
-      $('#status_upload').find('.card-body').text('');
-      $('#tables').hide(); 
-      event.stopPropagation();
-      event.preventDefault();
-
-      if( typeof files == 'undefined' ) return;
-
-      var data = new FormData();
-
-      $.each( files, function( key, value ){
-        data.append( key, value );
-      });
-
-      data.append('file_upload', 1);
-
-        $.ajax({
-            url: "handler.php",
-            type: 'POST',
-            contentType: false,
-            processData: false,
-            data: data,
-            success: function(res){
-              res = JSON.parse(res);
-              if (res.length > 0) {
-                for (var i=0; i<res.length; i++) {
-                  if(typeof res[i]['text'] === "undefined"){
-                    table.clear().draw();
-                    for (var j=0; j<res.length; j++) {
-                      $('#tables').show(); 
-                      table.row.add( [ res[j]['id'], res[j]['name'], res[j]['val'] ] ).draw();  
-                    }    
-                  } else {
-                    $('#status_upload').show();
-                    $('#status_upload').find('.card-body').append(res[i]['text']+'<br>');   
-                  }
-                }
-              }
-
-            },
-            error: function(res){
-              res = JSON.parse(res);
-              console.error(res);
-              $('#status_upload').show();
-              $('#status_upload').find('.card-body').append('<pre>'+res+'</pre>');
-            }
-          });
-      })
-    })
-  </script>
 </body>
 
 </html>
